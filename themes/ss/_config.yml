@@ -1,0 +1,32 @@
+
+# html lang
+language: en
+
+# main menu navigation
+menu:
+  Home: /
+  About: /about
+  Contact: /contact
+  Archives: /archives
+
+instagram: i
+github: i
+email: i
+
+# Miscelaneous
+favicon: /favicon.ico
+
+# stylesheets loaded in the <head>
+stylesheets:
+- /css/ss.css
+- /assets/css/main.css
+
+stylesheets_no:
+- /assets/css/noscript.css
+
+# scripts loaded in the end of the body
+scripts:
+- /js/ss.js
+# - /js/main.js
+# - /js/jquery.min.js
+# - /js/stopExecutionOnTimeout.js

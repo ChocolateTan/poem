@@ -1,0 +1,88 @@
+<div class="is-preload-0 is-preload-1 is-preload-2">
+
+    <!-- Main -->
+    <div id="main">
+
+        <!-- Header -->
+        <header id="header">
+            <h1>
+                <%= config.author%>
+            </h1>
+            <!-- <p>Just another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p> -->
+            <ul class="icons">
+                <!-- <li><a href="<%=config.twitter%>" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+                <li><a href="<%=config.instagram%>" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="<%=config.github%>" class="icon fa-github"><span class="label">Github</span></a></li>
+                <li><a href="<%=config.email%>" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+            </ul>
+        </header>
+
+        <!-- Thumbnail -->
+        <section id="thumbnails">
+            <% if (page.posts.length > 0) { %>
+            <% var i=1%>
+            <% page.posts.sort('date', -1).each(function(post) { %>
+            <% if (i == 1) {%>
+            <article>
+                <a class="thumbnail" href="<%= post.url %>" data-position="left center"><img src="<%= post.url%>" alt="" /></a>
+                <h2>
+                    <%= post.title %>
+                </h2>
+                <p>
+
+                    <article id="post">
+                        <%-post.excerpt%>
+                    </article>
+                </p>
+                <p><a href="<%- config.root %><%- post.path %>#more">more</a></p>
+            </article>
+
+            <% } else if (i == 3 || i == 5){ %>
+            <article>
+                <a class="thumbnail" href="<%= post.url %>" data-position="top center"><img src="<%= post.url%>" alt="" /></a>
+                <h2>
+                    <%= post.title %>
+                </h2>
+                <p>
+                    <article id="post">
+                        <%-post.excerpt%>
+                    </article>
+                </p>
+                <p><a href="<%- config.root %><%- post.path %>#more">more</a></p>
+            </article>
+            <% } else {%>
+            <article>
+                <a class="thumbnail" href="<%= post.url %>"><img src="<%= post.url%>" alt="" /></a>
+                <h2>
+                    <%= post.title %>
+                </h2>
+                <p>
+                    <article id="post">
+                        <%-post.excerpt%>
+                    </article>
+                </p>
+                <p><a href="<%- config.root %><%- post.path %>#more">more</a></p>
+            </article>
+            <% } %>
+            <% i++%>
+            <% }); %>
+            <% } %>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; Untitled.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
+            </ul>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</div>
