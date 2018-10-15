@@ -1,88 +1,105 @@
-<div class="is-preload-0 is-preload-1 is-preload-2">
+<%
+var pageTitle = page.title || config.subtitle || '';
+if (is_archive()) pageTitle = 'Archives';
+if (is_tag()) pageTitle = 'Tag: ' + page.tag;
+if (is_category()) pageTitle = 'Category: ' + page.category;
+if (is_month()) pageTitle += ': ' + page.month + '/' + page.year;
+if (is_year()) pageTitle += ': ' + page.year;
+pageTitle += ' [ ' + config.title + ' ]';
+%>
+<!DOCTYPE html>
+<html lang="<%=config.language%>">
 
-    <!-- Main -->
-    <div id="main">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>
+        <%=pageTitle%>
+    </title>
+    <% if (theme.stylesheets !== undefined && theme.stylesheets.length > 0) { %>
+    <!-- stylesheets list from config.yml -->
+    <% theme.stylesheets.forEach(function(url) { %>
+    <link rel="stylesheet" href="<%=url%>">
+    <% }); %>
+    <% theme.stylesheets_no.forEach(function(url) { %>
+    <noscript>
+        <link rel="stylesheet" href="<%=url%>"></noscript>
+    <% }); %>
+    <% } %>
 
-        <!-- Header -->
-        <header id="header">
-            <h1>
-                <%= config.author%>
-            </h1>
-            <!-- <p>Just another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p> -->
-            <ul class="icons">
-                <!-- <li><a href="<%=config.twitter%>" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
-                <li><a href="<%=config.instagram%>" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="<%=config.github%>" class="icon fa-github"><span class="label">Github</span></a></li>
-                <li><a href="<%=config.email%>" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-            </ul>
-        </header>
+    <!-- <link rel="stylesheet" href="/assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript> -->
+</head>
 
-        <!-- Thumbnail -->
-        <section id="thumbnails">
-            <% if (page.posts.length > 0) { %>
-            <% var i=1%>
-            <% page.posts.sort('date', -1).each(function(post) { %>
-            <% if (i == 1) {%>
-            <article>
-                <a class="thumbnail" href="<%= post.url %>" data-position="left center"><img src="<%= post.url%>" alt="" /></a>
-                <h2>
-                    <%= post.title %>
-                </h2>
-                <p>
+<body>
+    <div id="content-outer">
+        <div id="content-inner">
+            <div class="is-preload-0 is-preload-1 is-preload-2">
 
-                    <article id="post">
-                        <%-post.excerpt%>
-                    </article>
-                </p>
-                <p><a href="<%- config.root %><%- post.path %>#more">more</a></p>
-            </article>
+                <!-- Main -->
+                <div id="main">
 
-            <% } else if (i == 3 || i == 5){ %>
-            <article>
-                <a class="thumbnail" href="<%= post.url %>" data-position="top center"><img src="<%= post.url%>" alt="" /></a>
-                <h2>
-                    <%= post.title %>
-                </h2>
-                <p>
-                    <article id="post">
-                        <%-post.excerpt%>
-                    </article>
-                </p>
-                <p><a href="<%- config.root %><%- post.path %>#more">more</a></p>
-            </article>
-            <% } else {%>
-            <article>
-                <a class="thumbnail" href="<%= post.url %>"><img src="<%= post.url%>" alt="" /></a>
-                <h2>
-                    <%= post.title %>
-                </h2>
-                <p>
-                    <article id="post">
-                        <%-post.excerpt%>
-                    </article>
-                </p>
-                <p><a href="<%- config.root %><%- post.path %>#more">more</a></p>
-            </article>
-            <% } %>
-            <% i++%>
-            <% }); %>
-            <% } %>
-        </section>
+                    <!-- Header -->
+                    <header id="header">
+                        <h1>
+                            <%= config.author %>
+                        </h1>
+                        <!-- <p>Just another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p> -->
+                        <ul class="icons">
+                            <!-- <li><a href="<%=config.twitter%>" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+                            <li><a href="<%- config.instagram %>" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                            <li><a href="<%- config.github %>" class="icon fa-github"><span class="label">Github</span></a></li>
+                            <li><a href="<%- config.email %>" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+                        </ul>
+                        <div class="pagination">
+                            <%- paginator({ end_size: 2, mid_size: 1}) %>
+                        </div>
+                    </header>
 
-        <!-- Footer -->
-        <footer id="footer">
-            <ul class="copyright">
-                <li>&copy; Untitled.</li>
-                <li>Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
-            </ul>
-        </footer>
+                    <!-- Thumbnail -->
+                    <section id="thumbnails">
+                        <% if (page.posts.length > 0) { %>
+                        <% var i=1%>
+                        <% page.posts.sort('date', -1).each(function(post) { %>
+                        <article>
+                            <a class="thumbnail" href="<%= post.url %>"><img src="<%= post.url%>" alt="" /></a>
+                            <h2>
+                                <%= post.title %>
+                            </h2>
+                            <p>
+                                <%- post.excerpt %>
+                            </p>
 
+                            <!-- <a target="_blank" href="<%- config.root %><%- post.path %>#more">more</a> -->
+                        </article>
+
+                        <% i++%>
+                        <% }); %>
+                        <% } %>
+                    </section>
+                    <!-- Footer -->
+                    <footer id="footer">
+
+                        <div class="pagination">
+                            <%- paginator({ end_size: 2, mid_size: 1}) %>
+                        </div>
+                        <ul class="copyright">
+                            <li>&copy; Untitled.</li>
+                            <li>Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Scripts -->
-    <!-- <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/browser.min.js"></script>
-    <script src="/assets/js/breakpoints.min.js"></script>
-    <script src="/assets/js/main.js"></script> -->
+    <% if (theme.scripts !== undefined && theme.scripts.length > 0) { %>
+    <!-- scripts list from theme config.yml -->
+    <% theme.scripts.forEach(function(url) { %>
+    <script src="<%=url%>"></script>
+    <% }); %>
+    <% } %>
 
-</div>
+</body>
+
+</html>

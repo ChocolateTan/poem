@@ -1,7 +1,90 @@
+<%
+var pageTitle = page.title || config.subtitle || '';
+if (is_archive()) pageTitle = 'Archives';
+if (is_tag()) pageTitle = 'Tag: ' + page.tag;
+if (is_category()) pageTitle = 'Category: ' + page.category;
+if (is_month()) pageTitle += ': ' + page.month + '/' + page.year;
+if (is_year()) pageTitle += ': ' + page.year;
+pageTitle += ' [ ' + config.title + ' ]';
+%>
+<!DOCTYPE html>
+<html lang="<%=config.language%>">
 
-<article id="post">
-  <h1><%=page.title%></h1>
-  <%-page.content%>
-</article>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>
+        <%=pageTitle%>
+    </title>
+    <% if (theme.stylesheets !== undefined && theme.stylesheets.length > 0) { %>
+    <!-- stylesheets list from config.yml -->
+    <% theme.stylesheets.forEach(function(url) { %>
+    <link rel="stylesheet" href="<%=url%>">
+    <% }); %>
+    <% theme.stylesheets_no.forEach(function(url) { %>
+    <noscript>
+        <link rel="stylesheet" href="<%=url%>"></noscript>
+    <% }); %>
+    <% } %>
 
-<%-paginator()%>
+    <!-- <link rel="stylesheet" href="/assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript> -->
+</head>
+
+<body class="fullscreen">
+    <div id="content-outer">
+        <!-- <div id="content-inner"> -->
+            <!-- <div class="is-preload-0 is-preload-1 is-preload-2"> -->
+
+                <!-- Main -->
+                <div id="main">
+
+                    <!-- Header -->
+                    <header id="header">
+                        <h1>
+                            <%= config.author %>
+                        </h1>
+                        <!-- <p>Just another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p> -->
+                        <ul class="icons">
+                            <!-- <li><a href="<%=config.twitter%>" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+                            <li><a href="<%- config.instagram %>" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                            <li><a href="<%- config.github %>" class="icon fa-github"><span class="label">Github</span></a></li>
+                            <li><a href="<%- config.email %>" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+                        </ul>
+                    </header>
+
+                    <!-- Thumbnail -->
+                    <section id="thumbnails">
+                        <article>
+                            <a class="thumbnail" href="<%= page.url %>"><img src="<%= page.url%>" alt="" /></a>
+                            <h2>
+                                <%= page.title %>
+                            </h2>
+                            <p>
+                                <%- page.content %>
+                            </p>
+                        </article>
+                    </section>
+
+                    <!-- Footer -->
+                    <footer id="footer">
+                        <ul class="copyright">
+                            <li>&copy; Untitled.</li>
+                            <li>Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
+                        </ul>
+                    </footer>
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
+    </div>
+
+    <% if (theme.scripts !== undefined && theme.scripts.length > 0) { %>
+    <!-- scripts list from theme config.yml -->
+    <% theme.scripts.forEach(function(url) { %>
+    <script src="<%=url%>"></script>
+    <% }); %>
+    <% } %>
+
+</body>
+
+</html>
