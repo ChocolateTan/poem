@@ -9,24 +9,27 @@ menu:
   Contact: /contact
   Archives: /archives
 
-instagram: i
-github: i
-email: i
+instagram: https://www.instagram.com/dondontam/
+github: https://github.com/ChocolateTan
+email: 390032295@qq.com
 
 # Miscelaneous
 favicon: /favicon.ico
 
 # stylesheets loaded in the <head>
 stylesheets:
-- /css/ss.css
-- /assets/css/main.css
+- /poem/css/ss.css
+- /poem/assets/css/main.css
 
 stylesheets_no:
-- /assets/css/noscript.css
+- /poem/assets/css/noscript.css
 
 # scripts loaded in the end of the body
 scripts:
-- /js/ss.js
+- /poem/js/ss.js
+- /poem/assets/js/jquery.min.js
+- /poem/assets/js/browser.min.js
+- /poem/assets/js/breakpoints.min.js
+- /poem/assets/js/main.js
 # - /js/main.js
-# - /js/jquery.min.js
 # - /js/stopExecutionOnTimeout.js
